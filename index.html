@@ -8,9 +8,9 @@
 
   <style>
     :root {
-      /* =====================================================
+      /* =========================================
          COLOR PALETTE
-         ===================================================== */
+         ========================================= */
 
       --bg-color: #561C24;
       --card-bg: #E8D8C4;
@@ -29,9 +29,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        GLOBAL
-       ===================================================== */
+       ========================================= */
 
     * {
       box-sizing: border-box;
@@ -64,9 +64,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        MAIN CONTAINER
-       ===================================================== */
+       ========================================= */
 
     .app-container {
       width: 100%;
@@ -79,14 +79,14 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        LOADER
-       ===================================================== */
+       ========================================= */
 
     .loader {
       text-align: center;
 
-      padding: 25px;
+      padding: 30px;
 
       font-size: 1rem;
 
@@ -105,6 +105,7 @@
       margin: 14px auto 0;
 
       border: 3px solid var(--border);
+
       border-top-color: var(--card-bg);
 
       border-radius: 50%;
@@ -124,9 +125,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        MODULE MENU
-       ===================================================== */
+       ========================================= */
 
     .module-menu {
       display: flex;
@@ -144,7 +145,7 @@
 
       padding: 18px 22px;
 
-      border-radius: 18px;
+      border-radius: 30px;
 
       font-size: 1.05rem;
 
@@ -154,15 +155,12 @@
 
       cursor: pointer;
 
-      border: 2px solid transparent;
-
       box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.25);
+        0 4px 10px rgba(0, 0, 0, 0.25);
 
       transition:
         transform 0.15s ease,
-        background-color 0.2s ease,
-        border-color 0.2s ease;
+        background-color 0.2s ease;
 
       user-select: none;
     }
@@ -171,9 +169,7 @@
     .module-card:hover {
       transform: translateY(-2px);
 
-      background-color: var(--light-bg);
-
-      border-color: var(--accent);
+      background-color: #F3E9DD;
     }
 
 
@@ -182,29 +178,9 @@
     }
 
 
-    /* Disabled Modules */
-
-    .module-card.disabled {
-      opacity: 0.45;
-
-      cursor: not-allowed;
-
-      transform: none;
-    }
-
-
-    .module-card.disabled:hover {
-      transform: none;
-
-      background-color: var(--card-bg);
-
-      border-color: transparent;
-    }
-
-
-    /* =====================================================
-       QUIZ CARD
-       ===================================================== */
+    /* =========================================
+       QUIZ ENGINE
+       ========================================= */
 
     .quiz-card {
       background-color: var(--card-bg);
@@ -216,7 +192,7 @@
       padding: 24px 20px;
 
       box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.30);
+        0 8px 20px rgba(0, 0, 0, 0.3);
 
       display: none;
 
@@ -226,9 +202,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        QUIZ HEADER
-       ===================================================== */
+       ========================================= */
 
     .quiz-header {
       display: flex;
@@ -246,7 +222,7 @@
       border-bottom:
         1px solid var(--border);
 
-      padding-bottom: 10px;
+      padding-bottom: 8px;
 
       gap: 10px;
     }
@@ -261,11 +237,9 @@
 
       cursor: pointer;
 
-      font-weight: 700;
+      font-weight: 600;
 
       font-size: 0.9rem;
-
-      padding: 5px 0;
     }
 
 
@@ -276,14 +250,14 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        PROGRESS BAR
-       ===================================================== */
+       ========================================= */
 
     .progress-bar-wrap {
       width: 100%;
 
-      height: 7px;
+      height: 6px;
 
       background: var(--border);
 
@@ -305,24 +279,24 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        QUESTION
-       ===================================================== */
+       ========================================= */
 
     .question-text {
       font-size: 1.05rem;
 
-      font-weight: 650;
+      font-weight: 600;
 
-      line-height: 1.5;
+      line-height: 1.4;
 
       color: var(--card-text);
     }
 
 
-    /* =====================================================
+    /* =========================================
        OPTIONS
-       ===================================================== */
+       ========================================= */
 
     .options-list {
       display: flex;
@@ -334,27 +308,24 @@
 
 
     .option-btn {
-      background-color: var(--white);
+      background: var(--white);
 
       border:
         2px solid var(--border);
 
       border-radius: 12px;
 
-      padding: 13px 14px;
+      padding: 12px 14px;
 
       text-align: left;
 
       font-size: 0.95rem;
 
-      line-height: 1.4;
-
       color: var(--card-text);
 
       cursor: pointer;
 
-      transition:
-        all 0.2s ease;
+      transition: all 0.2s ease;
 
       width: 100%;
     }
@@ -364,17 +335,8 @@
       border-color: var(--accent);
 
       background-color: var(--light-bg);
-
-      transform: translateY(-1px);
     }
 
-
-    .option-btn:disabled {
-      cursor: default;
-    }
-
-
-    /* Correct Answer */
 
     .option-btn.correct {
       background-color: #DCEBDD !important;
@@ -382,14 +344,11 @@
       border-color:
         var(--success) !important;
 
-      color:
-        var(--success);
+      color: var(--success);
 
-      font-weight: 700;
+      font-weight: 600;
     }
 
-
-    /* Incorrect Answer */
 
     .option-btn.incorrect {
       background-color: #F3DADA !important;
@@ -397,16 +356,15 @@
       border-color:
         var(--error) !important;
 
-      color:
-        var(--error);
+      color: var(--error);
 
-      font-weight: 700;
+      font-weight: 600;
     }
 
 
-    /* =====================================================
+    /* =========================================
        SHORT ANSWER
-       ===================================================== */
+       ========================================= */
 
     .short-input-group {
       display: flex;
@@ -418,7 +376,7 @@
 
 
     .short-input {
-      padding: 13px;
+      padding: 12px;
 
       border:
         2px solid var(--border);
@@ -433,7 +391,7 @@
 
       color: var(--card-text);
 
-      background-color: var(--white);
+      background: var(--white);
     }
 
 
@@ -445,9 +403,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        ACTION BUTTON
-       ===================================================== */
+       ========================================= */
 
     .action-btn {
       background-color: var(--accent);
@@ -456,18 +414,18 @@
 
       border: none;
 
-      padding: 13px;
+      padding: 12px;
 
       border-radius: 10px;
 
       font-size: 1rem;
 
-      font-weight: 700;
+      font-weight: 600;
 
       cursor: pointer;
 
       transition:
-        background-color 0.2s ease,
+        background 0.2s ease,
         transform 0.1s ease;
     }
 
@@ -482,33 +440,20 @@
     }
 
 
-    /* =====================================================
-       NEXT BUTTON
-       ===================================================== */
-
-    .next-btn {
-      display: none;
-
-      width: 100%;
-
-      margin-top: 5px;
-    }
-
-
-    /* =====================================================
+    /* =========================================
        FEEDBACK
-       ===================================================== */
+       ========================================= */
 
     .feedback-box {
       display: none;
 
-      padding: 13px 14px;
+      padding: 12px 14px;
 
       border-radius: 10px;
 
       font-size: 0.9rem;
 
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
 
@@ -516,7 +461,7 @@
       background-color: #DCEBDD;
 
       border:
-        1px solid #8DB394;
+        1px solid #86B88E;
 
       color: #24552F;
     }
@@ -532,9 +477,22 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
+       NEXT BUTTON
+       ========================================= */
+
+    .next-btn {
+      display: none;
+
+      width: 100%;
+
+      margin-top: 5px;
+    }
+
+
+    /* =========================================
        RESULTS
-       ===================================================== */
+       ========================================= */
 
     .results-box {
       display: none;
@@ -557,7 +515,7 @@
 
 
     .results-score {
-      font-size: 2.2rem;
+      font-size: 2rem;
 
       font-weight: bold;
 
@@ -565,16 +523,9 @@
     }
 
 
-    .results-percentage {
-      color: var(--card-text);
-
-      font-size: 1rem;
-    }
-
-
-    /* =====================================================
+    /* =========================================
        MOBILE
-       ===================================================== */
+       ========================================= */
 
     @media (max-width: 480px) {
 
@@ -595,7 +546,7 @@
 
         font-size: 1rem;
 
-        border-radius: 16px;
+        border-radius: 24px;
       }
 
 
@@ -614,7 +565,7 @@
 
 
       .option-btn {
-        padding: 12px;
+        padding: 13px 12px;
 
         font-size: 0.92rem;
       }
@@ -625,7 +576,9 @@
 
         font-size: 0.98rem;
       }
+
     }
+
   </style>
 </head>
 
@@ -634,9 +587,9 @@
 
   <div class="app-container">
 
-    <!-- ===================================================
-         LOADING
-         =================================================== -->
+    <!-- =========================================
+         LOADER
+         ========================================= -->
 
     <div
       id="loader"
@@ -647,9 +600,9 @@
     </div>
 
 
-    <!-- ===================================================
+    <!-- =========================================
          MODULE MENU
-         =================================================== -->
+         ========================================= -->
 
     <div
       id="menu-screen"
@@ -685,30 +638,12 @@
         Module 3 - Laws
       </div>
 
-
-      <!-- MODULE 4 -->
-
-      <div
-        class="module-card disabled"
-      >
-        Module 4 - Corrections Administration and Operation
-      </div>
-
-
-      <!-- MODULE 5 -->
-
-      <div
-        class="module-card disabled"
-      >
-        Module 5 - Overview of Reformation Program
-      </div>
-
     </div>
 
 
-    <!-- ===================================================
-         QUIZ ENGINE
-         =================================================== -->
+    <!-- =========================================
+         QUIZ CARD
+         ========================================= -->
 
     <div
       id="quiz-card"
@@ -769,7 +704,7 @@
       ></div>
 
 
-      <!-- NEXT -->
+      <!-- NEXT BUTTON -->
 
       <button
         id="next-btn"
@@ -802,7 +737,6 @@
 
         <p
           id="results-percentage"
-          class="results-percentage"
         ></p>
 
 
@@ -820,30 +754,23 @@
   </div>
 
 
-  <!-- =====================================================
+  <!-- =========================================
        JAVASCRIPT
-       ===================================================== -->
+       ========================================= -->
 
   <script>
 
-    /* =====================================================
+    /* =========================================
        GOOGLE APPS SCRIPT WEB APP URL
-
-       IMPORTANT:
-       Replace this with your actual /exec URL.
-
-       Example:
-
-       https://script.google.com/macros/s/XXXXXXXX/exec
-       ===================================================== */
+       ========================================= */
 
     const GAS_WEB_APP_URL =
-      'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+      'https://script.google.com/macros/s/AKfycbz13VVJZX_iMUEcWAVplAecMO8RXJK4I4VwJ-2tKwn2vsbHVAqa7l74F-TboRvB0JZaow/exec';
 
 
-    /* =====================================================
+    /* =========================================
        QUIZ VARIABLES
-       ===================================================== */
+       ========================================= */
 
     let rawQuizData = [];
 
@@ -856,15 +783,15 @@
     let currentModule = 0;
 
 
-    /* =====================================================
+    /* =========================================
        START MODULE
-       ===================================================== */
+       ========================================= */
 
     async function startModule(moduleNum) {
 
       /*
-       Only Modules 1, 2, and 3 are currently available.
-      */
+       Modules 1, 2, and 3 are available.
+       */
 
       if (![1, 2, 3].includes(moduleNum)) {
         return;
@@ -874,9 +801,7 @@
       currentModule = moduleNum;
 
 
-      /*
-       Show loader
-      */
+      /* Show loader */
 
       document.getElementById(
         'loader'
@@ -891,7 +816,16 @@
       try {
 
         /*
-         Build API URL
+         Build API URL.
+
+         Module 1:
+         /exec?module=1
+
+         Module 2:
+         /exec?module=2
+
+         Module 3:
+         /exec?module=3
         */
 
         const url =
@@ -901,9 +835,10 @@
 
 
         console.log(
-          'Loading module:',
+          'Loading Module:',
           moduleNum
         );
+
 
         console.log(
           'API URL:',
@@ -912,7 +847,7 @@
 
 
         /*
-         Request data from Apps Script
+         Request data from Google Apps Script
         */
 
         const response =
@@ -920,7 +855,7 @@
 
 
         /*
-         Check HTTP response
+         Check HTTP status
         */
 
         if (!response.ok) {
@@ -948,7 +883,7 @@
 
 
         /*
-         Check API response
+         Check API success
         */
 
         if (!result.success) {
@@ -975,7 +910,7 @@
 
 
         /*
-         Save quiz data
+         Store quiz data
         */
 
         rawQuizData =
@@ -1042,9 +977,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        INITIALIZE QUIZ
-       ===================================================== */
+       ========================================= */
 
     function initQuiz() {
 
@@ -1075,9 +1010,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        LOAD QUESTION
-       ===================================================== */
+       ========================================= */
 
     function loadQuestion() {
 
@@ -1116,7 +1051,7 @@
 
 
       /*
-       Progress
+       Progress bar
       */
 
       document.getElementById(
@@ -1184,9 +1119,9 @@
         '';
 
 
-      /* ===================================================
+      /* =========================================
          MULTIPLE CHOICE
-         =================================================== */
+         ========================================= */
 
       if (q.type === 'mcq') {
 
@@ -1218,9 +1153,8 @@
 
 
             /*
-             The first character is
-             the answer letter.
-             */
+             Extract answer letter
+            */
 
             const letter =
               opt.charAt(0);
@@ -1254,9 +1188,9 @@
       }
 
 
-      /* ===================================================
+      /* =========================================
          SHORT ANSWER
-         =================================================== */
+         ========================================= */
 
       else if (
         q.type === 'short'
@@ -1301,9 +1235,9 @@
     }
 
 
-    /* =====================================================
-       CHECK MCQ
-       ===================================================== */
+    /* =========================================
+       CHECK MULTIPLE CHOICE
+       ========================================= */
 
     function checkMCQAnswer(
       selectedLetter,
@@ -1311,10 +1245,6 @@
       explanation,
       clickedBtn
     ) {
-
-      /*
-       Prevent multiple answers.
-      */
 
       if (answered) {
         return;
@@ -1330,7 +1260,7 @@
 
 
       /*
-       Get all answer buttons.
+       Get all answer buttons
       */
 
       const allBtns =
@@ -1340,8 +1270,8 @@
 
 
       /*
-       Disable all buttons
-       and highlight correct answer.
+       Disable all answers
+       and highlight correct answer
       */
 
       allBtns.forEach(
@@ -1367,7 +1297,7 @@
 
 
       /*
-       Mark incorrect selection.
+       Highlight incorrect selection
       */
 
       if (!isCorrect) {
@@ -1380,7 +1310,7 @@
 
 
       /*
-       Increase score.
+       Add score
       */
 
       else {
@@ -1391,7 +1321,7 @@
 
 
       /*
-       Show feedback.
+       Show feedback
       */
 
       showFeedback(
@@ -1402,9 +1332,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        CHECK SHORT ANSWER
-       ===================================================== */
+       ========================================= */
 
     function checkShortAnswer() {
 
@@ -1432,7 +1362,7 @@
 
 
       /*
-       Don't submit empty answer.
+       Don't submit blank answer
       */
 
       if (!val) {
@@ -1447,7 +1377,7 @@
 
 
       /*
-       Compare against acceptable answers.
+       Compare acceptable answers
       */
 
       const isCorrect =
@@ -1472,9 +1402,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        SHOW FEEDBACK
-       ===================================================== */
+       ========================================= */
 
     function showFeedback(
       isCorrect,
@@ -1516,7 +1446,7 @@
 
 
       /*
-       Show next button.
+       Show next button
       */
 
       document.getElementById(
@@ -1527,9 +1457,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        NEXT QUESTION
-       ===================================================== */
+       ========================================= */
 
     function nextQuestion() {
 
@@ -1554,14 +1484,14 @@
     }
 
 
-    /* =====================================================
+    /* =========================================
        SHOW RESULTS
-       ===================================================== */
+       ========================================= */
 
     function showResults() {
 
       /*
-       Complete progress bar.
+       Complete progress bar
       */
 
       document.getElementById(
@@ -1571,7 +1501,7 @@
 
 
       /*
-       Change tracker.
+       Update tracker
       */
 
       document.getElementById(
@@ -1581,7 +1511,7 @@
 
 
       /*
-       Clear question.
+       Clear question
       */
 
       document.getElementById(
@@ -1591,7 +1521,7 @@
 
 
       /*
-       Hide interaction.
+       Hide interactive area
       */
 
       document.getElementById(
@@ -1601,7 +1531,7 @@
 
 
       /*
-       Hide feedback.
+       Hide feedback
       */
 
       document.getElementById(
@@ -1611,7 +1541,7 @@
 
 
       /*
-       Hide next button.
+       Hide next button
       */
 
       document.getElementById(
@@ -1621,7 +1551,7 @@
 
 
       /*
-       Calculate percentage.
+       Calculate percentage
       */
 
       const percentage =
@@ -1633,7 +1563,7 @@
 
 
       /*
-       Display score.
+       Display score
       */
 
       document.getElementById(
@@ -1649,7 +1579,7 @@
 
 
       /*
-       Show results.
+       Show results
       */
 
       document.getElementById(
@@ -1660,14 +1590,14 @@
     }
 
 
-    /* =====================================================
-       BACK TO MODULE MENU
-       ===================================================== */
+    /* =========================================
+       BACK TO MENU
+       ========================================= */
 
     function showMenu() {
 
       /*
-       Hide quiz.
+       Hide quiz
       */
 
       document.getElementById(
@@ -1677,7 +1607,7 @@
 
 
       /*
-       Show menu.
+       Show module menu
       */
 
       document.getElementById(
@@ -1687,7 +1617,7 @@
 
 
       /*
-       Reset quiz state.
+       Reset quiz
       */
 
       rawQuizData = [];
