@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>BuCor Learning Portal</title>
 
+
   <style>
+
     :root {
+
       /* =========================================
          COLOR PALETTE
          ========================================= */
@@ -34,8 +42,11 @@
        ========================================= */
 
     * {
+
       box-sizing: border-box;
+
       margin: 0;
+
       padding: 0;
 
       font-family:
@@ -50,6 +61,7 @@
 
 
     body {
+
       background-color: var(--bg-color);
 
       color: var(--white);
@@ -57,7 +69,9 @@
       min-height: 100vh;
 
       display: flex;
+
       justify-content: center;
+
       align-items: center;
 
       padding: 20px 15px;
@@ -69,10 +83,13 @@
        ========================================= */
 
     .app-container {
+
       width: 100%;
+
       max-width: 420px;
 
       display: flex;
+
       flex-direction: column;
 
       gap: 16px;
@@ -84,6 +101,7 @@
        ========================================= */
 
     .loader {
+
       text-align: center;
 
       padding: 30px;
@@ -95,11 +113,13 @@
 
 
     .loader::after {
+
       content: "";
 
       display: block;
 
       width: 28px;
+
       height: 28px;
 
       margin: 14px auto 0;
@@ -115,13 +135,19 @@
 
 
     @keyframes spin {
+
       from {
+
         transform: rotate(0deg);
+
       }
 
       to {
+
         transform: rotate(360deg);
+
       }
+
     }
 
 
@@ -130,6 +156,7 @@
        ========================================= */
 
     .module-menu {
+
       display: flex;
 
       flex-direction: column;
@@ -139,6 +166,7 @@
 
 
     .module-card {
+
       background-color: var(--card-bg);
 
       color: var(--card-text);
@@ -167,6 +195,7 @@
 
 
     .module-card:hover {
+
       transform: translateY(-2px);
 
       background-color: #F3E9DD;
@@ -174,6 +203,7 @@
 
 
     .module-card:active {
+
       transform: scale(0.98);
     }
 
@@ -183,6 +213,7 @@
        ========================================= */
 
     .quiz-card {
+
       background-color: var(--card-bg);
 
       color: var(--card-text);
@@ -207,6 +238,7 @@
        ========================================= */
 
     .quiz-header {
+
       display: flex;
 
       justify-content: space-between;
@@ -229,6 +261,7 @@
 
 
     .back-btn {
+
       background: none;
 
       border: none;
@@ -244,6 +277,7 @@
 
 
     .back-btn:hover {
+
       color: var(--accent-dark);
 
       text-decoration: underline;
@@ -255,6 +289,7 @@
        ========================================= */
 
     .progress-bar-wrap {
+
       width: 100%;
 
       height: 6px;
@@ -268,6 +303,7 @@
 
 
     .progress-bar {
+
       height: 100%;
 
       width: 0%;
@@ -284,6 +320,7 @@
        ========================================= */
 
     .question-text {
+
       font-size: 1.05rem;
 
       font-weight: 600;
@@ -299,6 +336,7 @@
        ========================================= */
 
     .options-list {
+
       display: flex;
 
       flex-direction: column;
@@ -308,6 +346,7 @@
 
 
     .option-btn {
+
       background: var(--white);
 
       border:
@@ -332,6 +371,7 @@
 
 
     .option-btn:not(:disabled):hover {
+
       border-color: var(--accent);
 
       background-color: var(--light-bg);
@@ -339,6 +379,7 @@
 
 
     .option-btn.correct {
+
       background-color: #DCEBDD !important;
 
       border-color:
@@ -351,6 +392,7 @@
 
 
     .option-btn.incorrect {
+
       background-color: #F3DADA !important;
 
       border-color:
@@ -367,6 +409,7 @@
        ========================================= */
 
     .short-input-group {
+
       display: flex;
 
       flex-direction: column;
@@ -376,6 +419,7 @@
 
 
     .short-input {
+
       padding: 12px;
 
       border:
@@ -396,6 +440,7 @@
 
 
     .short-input:focus {
+
       border-color: var(--accent);
 
       box-shadow:
@@ -408,6 +453,7 @@
        ========================================= */
 
     .action-btn {
+
       background-color: var(--accent);
 
       color: var(--white);
@@ -431,11 +477,13 @@
 
 
     .action-btn:hover {
+
       background-color: var(--accent-dark);
     }
 
 
     .action-btn:active {
+
       transform: scale(0.98);
     }
 
@@ -445,6 +493,7 @@
        ========================================= */
 
     .feedback-box {
+
       display: none;
 
       padding: 12px 14px;
@@ -458,6 +507,7 @@
 
 
     .feedback-box.correct {
+
       background-color: #DCEBDD;
 
       border:
@@ -468,6 +518,7 @@
 
 
     .feedback-box.incorrect {
+
       background-color: #F3DADA;
 
       border:
@@ -482,6 +533,7 @@
        ========================================= */
 
     .next-btn {
+
       display: none;
 
       width: 100%;
@@ -495,6 +547,7 @@
        ========================================= */
 
     .results-box {
+
       display: none;
 
       text-align: center;
@@ -508,6 +561,7 @@
 
 
     .results-box h2 {
+
       color: var(--accent-dark);
 
       font-size: 1.4rem;
@@ -515,6 +569,7 @@
 
 
     .results-score {
+
       font-size: 2rem;
 
       font-weight: bold;
@@ -530,11 +585,13 @@
     @media (max-width: 480px) {
 
       body {
+
         padding: 12px;
       }
 
 
       .app-container {
+
         max-width: 100%;
 
         gap: 12px;
@@ -542,6 +599,7 @@
 
 
       .module-card {
+
         padding: 16px 18px;
 
         font-size: 1rem;
@@ -551,6 +609,7 @@
 
 
       .quiz-card {
+
         padding: 18px 15px;
 
         border-radius: 17px;
@@ -560,11 +619,13 @@
 
 
       .question-text {
+
         font-size: 1rem;
       }
 
 
       .option-btn {
+
         padding: 13px 12px;
 
         font-size: 0.92rem;
@@ -572,6 +633,7 @@
 
 
       .action-btn {
+
         padding: 13px;
 
         font-size: 0.98rem;
@@ -580,12 +642,15 @@
     }
 
   </style>
+
 </head>
 
 
 <body>
 
+
   <div class="app-container">
+
 
     <!-- =========================================
          LOADER
@@ -596,7 +661,9 @@
       class="loader"
       style="display: none;"
     >
+
       Loading Quiz Data...
+
     </div>
 
 
@@ -609,13 +676,16 @@
       class="module-menu"
     >
 
+
       <!-- MODULE 1 -->
 
       <div
         class="module-card"
         onclick="startModule(1)"
       >
+
         Module 1 - General Information
+
       </div>
 
 
@@ -625,7 +695,9 @@
         class="module-card"
         onclick="startModule(2)"
       >
+
         Module 2 - Personnel Issued and Concern
+
       </div>
 
 
@@ -635,8 +707,11 @@
         class="module-card"
         onclick="startModule(3)"
       >
+
         Module 3 - Laws
+
       </div>
+
 
     </div>
 
@@ -650,21 +725,28 @@
       class="quiz-card"
     >
 
+
       <!-- HEADER -->
 
       <div class="quiz-header">
+
 
         <button
           class="back-btn"
           onclick="showMenu()"
         >
+
           ← Modules
+
         </button>
 
 
         <span id="question-tracker">
+
           Question 1/30
+
         </span>
+
 
       </div>
 
@@ -711,7 +793,9 @@
         class="action-btn next-btn"
         onclick="nextQuestion()"
       >
+
         Next Question →
+
       </button>
 
 
@@ -723,7 +807,9 @@
       >
 
         <h2>
+
           Module Completed!
+
         </h2>
 
 
@@ -731,7 +817,9 @@
           id="results-score"
           class="results-score"
         >
+
           0 / 0
+
         </div>
 
 
@@ -744,12 +832,32 @@
           class="action-btn"
           onclick="showMenu()"
         >
+
           Back to Main Menu
+
         </button>
+
 
       </div>
 
+
+      <!-- =========================================
+           NEW BACK TO HOME BUTTON
+           ========================================= -->
+
+      <button
+        class="action-btn"
+        onclick="showMenu()"
+        style="margin-top: 5px;"
+      >
+
+        ← Back to Home
+
+      </button>
+
+
     </div>
+
 
   </div>
 
@@ -759,6 +867,7 @@
        ========================================= -->
 
   <script>
+
 
     /* =========================================
        GOOGLE APPS SCRIPT WEB APP URL
@@ -789,12 +898,15 @@
 
     async function startModule(moduleNum) {
 
+
       /*
        Modules 1, 2, and 3 are available.
-       */
+      */
 
       if (![1, 2, 3].includes(moduleNum)) {
+
         return;
+
       }
 
 
@@ -814,6 +926,7 @@
 
 
       try {
+
 
         /*
          Build API URL.
@@ -936,6 +1049,7 @@
 
 
       catch (error) {
+
 
         console.error(
           'Quiz loading error:',
@@ -1220,7 +1334,9 @@
             class="action-btn"
             onclick="checkShortAnswer()"
           >
+
             Submit Answer
+
           </button>
 
         `;
@@ -1246,8 +1362,11 @@
       clickedBtn
     ) {
 
+
       if (answered) {
+
         return;
+
       }
 
 
@@ -1339,7 +1458,9 @@
     function checkShortAnswer() {
 
       if (answered) {
+
         return;
+
       }
 
 
@@ -1366,7 +1487,9 @@
       */
 
       if (!val) {
+
         return;
+
       }
 
 
@@ -1390,7 +1513,9 @@
 
 
       if (isCorrect) {
+
         score++;
+
       }
 
 
@@ -1411,6 +1536,7 @@
       explanation
     ) {
 
+
       const feedbackBox =
         document.getElementById(
           'feedback-box'
@@ -1427,11 +1553,13 @@
       feedbackBox.innerHTML = `
 
         <strong>
+
           ${
             isCorrect
               ? '✓ Correct!'
               : '✗ Incorrect'
           }
+
         </strong>
 
         <br>
@@ -1489,6 +1617,7 @@
        ========================================= */
 
     function showResults() {
+
 
       /*
        Complete progress bar
@@ -1596,6 +1725,7 @@
 
     function showMenu() {
 
+
       /*
        Hide quiz
       */
@@ -1632,7 +1762,9 @@
 
     }
 
+
   </script>
+
 
 </body>
 </html>
