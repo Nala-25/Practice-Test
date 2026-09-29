@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuCor Learning Portal</title>
+
+  <style>
+    :root {
+      --bg-color: #561C24;     /* Deep wine dark background */
+      --card-bg: #E8D8C4;      /* Light cream card background */
+      --card-text: #561C24;    /* Deep wine text inside cards for high contrast */
+      --accent: #6D2932;       /* Muted burgundy interactive/accent elements */
+      --success: #15803d;      /* Kept for functional status states */
+      --error: #b91c1c;        /* Kept for functional error states */
+      --border: #C7B7A3;       /* Warm beige borders and dividers */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 15px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* =========================
+       MODULE MENU
+       ========================= */
+
+    .module-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .module-card {
+      background-color: var(--card-bg);
+      color: var(--card-text);
+      padding: 18px 22px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      transition:
+        transform 0.15s ease,
+        background-color 0.2s ease;
+      user-select: none;
+    }
+
+    .module-card:hover {
+      transform: translateY(-2px);
+      background-color: #f7f4ee;
+    }
+
+    /* =========================
+       QUIZ CARD
+       ========================= */
+
+    .quiz-card {
+      background-color: var(--card-bg);
+      color: var(--card-text);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      color: #665c54;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* =========================
+       PROGRESS BAR
+       ========================= */
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 6px;
+      background: #dcd3c7;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    /* =========================
+       QUESTION
+       ========================= */
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* =========================
+       OPTIONS
+       ========================= */
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 0.95rem;
+      color: var(--card-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:not(:disabled):hover {
+      border-color: var(--accent);
+      background-color: #f8fafc;
+    }
+
+    .option-btn.correct {
+      background-color: #dcfce7 !important;
+      border-color: var(--success) !important;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .option-btn.incorrect {
+      background-color: #fee2e2 !important;
+      border-color: var(--error) !important;
+      color: var(--error);
+      font-weight: 600;
+    }
+
+    /* =========================
+       SHORT ANSWER
+       ========================= */
+
+    .short-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .short-input {
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      width: 100%;
+      outline: none;
+    }
+
+    .short-input:focus {
+      border-color: var(--accent);
+    }
+
+    /* =========================
+       BUTTON
+       ========================= */
+
+    .action-btn {
+      background-color: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .action-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* =========================
+       FEEDBACK
+       ========================= */
+
+    .feedback-box {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .feedback-box.correct {
+      background-color: #dcfce7;
+      border: 1px solid #86efac;
+      color: #14532d;
+    }
+
+    .feedback-box.incorrect {
+      background-color: #fee2e2;
+      border: 1px solid #fca5a5;
+      color: #7f1d1d;
+    }
+
+    /* =========================
+       NEXT BUTTON
+       ========================= */
+
+    .next-btn {
+      display: none;
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    /* =========================
+       LOADER
+       ========================= */
+
+    .loader {
+      text-align: center;
+      padding: 30px;
+      font-size: 1rem;
+      color: #d1c7bc;
+    }
+
+    /* =========================
+       RESULTS
+       ========================= */
+
+    .results-box {
+      display: none;
+      text-align: center;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .results-score {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px 10px;
+        align-items: flex-start;
+      }
+
+      .app-container {
+        max-width: 100%;
+        margin-top: 20px;
+      }
+
+      .module-card {
+        padding: 16px 18px;
+        font-size: 1rem;
+      }
+
+      .quiz-card {
+        padding: 20px 16px;
+      }
+
+      .question-text {
+        font-size: 1rem;
+      }
+
+      .option-btn {
+        padding: 13px;
+        font-size: 0.94rem;
+      }
+
+      .action-btn {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- LOADING -->
+    <div id="loader" class="loader" style="display: none;">
+      Loading Quiz Data...
+    </div>
+
+
+    <!-- =========================================
+         MODULE MENU
+         ========================================= -->
+
+    <div id="menu-screen" class="module-menu">
+
+      <div
+        class="module-card"
+        onclick="startModule(1)">
+        Module 1 - General Information
+      </div>
+
+      <div
+        class="module-card"
+        onclick="startModule(2)">
+        Module 2 - Personnel Issued and Concern
+      </div>
+
+      <div
+        class="module-card"
+        onclick="startModule(3)">
+        Module 3 - Laws
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         QUIZ ENGINE
+         ========================================= -->
+
+    <div id="quiz-card" class="quiz-card">
+
+      <div class="quiz-header">
+
+        <button
+          class="back-btn"
+          onclick="showMenu()">
+          ← Modules
+        </button>
+
+        <span id="question-tracker">
+          Question 1/30
+        </span>
+
+      </div>
+
+
+      <!-- PROGRESS BAR -->
+
+      <div class="progress-bar-wrap">
+        <div
+          id="progress-bar"
+          class="progress-bar">
+        </div>
+      </div>
+
+
+      <!-- QUESTION -->
+
+      <div
+        id="question-text"
+        class="question-text">
+      </div>
+
+
+      <!-- INTERACTIVE AREA -->
+
+      <div id="interactive-area"></div>
+
+
+      <!-- FEEDBACK -->
+
+      <div
+        id="feedback-box"
+        class="feedback-box">
+      </div>
+
+
+      <!-- NEXT -->
+
+      <button
+        id="next-btn"
+        class="action-btn next-btn"
+        onclick="nextQuestion()">
+
+        Next Question →
+
+      </button>
+
+
+      <!-- =========================================
+           RESULTS
+           ========================================= -->
+
+      <div
+        id="results-box"
+        class="results-box">
+
+        <h2>
+          Module Completed!
+        </h2>
+
+        <div
+          id="results-score"
+          class="results-score">
+
+          0 / 0
+
+        </div>
+
+        <p id="results-percentage"></p>
+
+        <button
+          class="action-btn"
+          onclick="showMenu()">
+
+          Back to Main Menu
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+       ========================================= -->
+
+  <script>
+
+    /*
+     * ==========================================
+     * GOOGLE APPS SCRIPT WEB APP URL
+     * ==========================================
+     *
+     * Replace this with your deployed
+     * Google Apps Script Web App URL.
+     *
+     * Example:
+     *
+     * https://script.google.com/macros/s/XXXXXXXX/exec
+     *
+     */
+
+    const GAS_WEB_APP_URL =
+      'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+
+    /*
+     * ==========================================
+     * QUIZ VARIABLES
+     * ==========================================
+     */
+
+    let rawQuizData = [];
+
+    let currentQuestionIndex = 0;
+
+    let score = 0;
+
+    let answered = false;
+
+    let currentModule = 0;
+
+    let moduleDataCache = {};
+
+
+    /*
+     * ==========================================
+     * START MODULE
+     * ==========================================
+     */
+
+    function startModule(moduleNum) {
+
+      /*
+       * Only Modules 1, 2 and 3 are available.
+       */
+
+      if (
+        moduleNum !== 1 &&
+        moduleNum !== 2 &&
+        moduleNum !== 3
+      ) {
+        return;
+      }
+
+
+      currentModule = moduleNum;
+
+
+      /*
+       * If module was already loaded,
+       * use cached data.
+       */
+
+      if (moduleDataCache[moduleNum]) {
+
+        rawQuizData =
+          moduleDataCache[moduleNum];
+
+        initQuiz();
+
+        return;
+      }
+
+
+      /*
+       * Show loading message.
+       */
+
+      document.getElementById('loader')
+        .style.display = 'block';
+
+
+      /*
+       * Fetch quiz data from
+       * Google Apps Script.
+       */
+
+      fetch(
+        `${GAS_WEB_APP_URL}?module=${moduleNum}`
+      )
+
+        .then(response => {
+
+          if (!response.ok) {
+
+            throw new Error(
+              `HTTP ${response.status}`
+            );
+
+          }
+
+          return response.json();
+
+        })
+
+        .then(result => {
+
+          if (!result.success) {
+
+            throw new Error(
+              result.error ||
+              'Unable to load quiz data.'
+            );
+
+          }
+
+
+          /*
+           * Cache the module.
+           */
+
+          moduleDataCache[moduleNum] =
+            result.data;
+
+
+          rawQuizData =
+            result.data;
+
+
+          document.getElementById('loader')
+            .style.display = 'none';
+
+
+          initQuiz();
+
+        })
+
+        .catch(error => {
+
+          document.getElementById('loader')
+            .style.display = 'none';
+
+
+          alert(
+            'Unable to load this module. ' +
+            'Please try again.'
+          );
+
+
+          console.error(error);
+
+        });
+
+    }
+
+
+    /*
+     * ==========================================
+     * INITIALIZE QUIZ
+     * ==========================================
+     */
+
+    function initQuiz() {
+
+      currentQuestionIndex = 0;
+
+      score = 0;
+
+      answered = false;
+
+
+      document.getElementById('menu-screen')
+        .style.display = 'none';
+
+
+      document.getElementById('quiz-card')
+        .style.display = 'flex';
+
+
+      document.getElementById('results-box')
+        .style.display = 'none';
+
+
+      loadQuestion();
+
+    }
+
+
+    /*
+     * ==========================================
+     * LOAD QUESTION
+     * ==========================================
+     */
+
+    function loadQuestion() {
+
+      answered = false;
+
+
+      const q =
+        rawQuizData[currentQuestionIndex];
+
+
+      /*
+       * QUESTION TRACKER
+       */
+
+      document.getElementById(
+        'question-tracker'
+      ).innerText =
+        `Question ${
+          currentQuestionIndex + 1
+        }/${rawQuizData.length}`;
+
+
+      /*
+       * PROGRESS
+       */
+
+      document.getElementById(
+        'progress-bar'
+      ).style.width =
+        `${
+          (currentQuestionIndex /
+          rawQuizData.length) * 100
+        }%`;
+
+
+      /*
+       * QUESTION TEXT
+       */
+
+      document.getElementById(
+        'question-text'
+      ).innerText =
+        q.question;
+
+
+      /*
+       * RESET FEEDBACK
+       */
+
+      const feedbackBox =
+        document.getElementById(
+          'feedback-box'
+        );
+
+      feedbackBox.style.display =
+        'none';
+
+      feedbackBox.className =
+        'feedback-box';
+
+
+      /*
+       * RESET NEXT BUTTON
+       */
+
+      document.getElementById(
+        'next-btn'
+      ).style.display =
+        'none';
+
+
+      /*
+       * INTERACTIVE AREA
+       */
+
+      const area =
+        document.getElementById(
+          'interactive-area'
+        );
+
+      area.style.display =
+        'block';
+
+      area.innerHTML =
+        '';
+
+
+      /*
+       * ======================================
+       * MULTIPLE CHOICE
+       * ======================================
+       */
+
+      if (q.type === 'mcq') {
+
+        const optionsList =
+          document.createElement('div');
+
+
+        optionsList.className =
+          'options-list';
+
+
+        q.options.forEach(opt => {
+
+          const btn =
+            document.createElement(
+              'button'
+            );
+
+
+          btn.className =
+            'option-btn';
+
+
+          btn.innerText =
+            opt;
+
+
+          const letter =
+            opt.charAt(0);
+
+
+          btn.onclick = () => {
+
+            checkMCQAnswer(
+              letter,
+              q.correctAnswer,
+              q.explanation,
+              btn
+            );
+
+          };
+
+
+          optionsList.appendChild(btn);
+
+        });
+
+
+        area.appendChild(
+          optionsList
+        );
+
+      }
+
+
+      /*
+       * ======================================
+       * SHORT ANSWER
+       * ======================================
+       */
+
+      else if (q.type === 'short') {
+
+        const group =
+          document.createElement(
+            'div'
+          );
+
+
+        group.className =
+          'short-input-group';
+
+
+        group.innerHTML = `
+
+          <input
+            type="text"
+            id="short-answer-input"
+            class="short-input"
+            placeholder="Type answer here..."
+            autocomplete="off"
+          >
+
+          <button
+            class="action-btn"
+            onclick="checkShortAnswer()">
+
+            Submit Answer
+
+          </button>
+
+        `;
+
+
+        area.appendChild(
+          group
+        );
+
+      }
+
+    }
+
+
+    /*
+     * ==========================================
+     * CHECK MULTIPLE CHOICE
+     * ==========================================
+     */
+
+    function checkMCQAnswer(
+      selectedLetter,
+      correctLetter,
+      explanation,
+      clickedBtn
+    ) {
+
+      if (answered) {
+        return;
+      }
+
+
+      answered = true;
+
+
+      const isCorrect =
+        selectedLetter ===
+        correctLetter;
+
+
+      const allBtns =
+        document.querySelectorAll(
+          '.option-btn'
+        );
+
+
+      /*
+       * Disable all options
+       * and highlight correct answer.
+       */
+
+      allBtns.forEach(btn => {
+
+        btn.disabled = true;
+
+
+        if (
+          btn.innerText.startsWith(
+            correctLetter
+          )
+        ) {
+
+          btn.classList.add(
+            'correct'
+          );
+
+        }
+
+      });
+
+
+      /*
+       * Score
+       */
+
+      if (isCorrect) {
+
+        score++;
+
+      }
+
+      else {
+
+        clickedBtn.classList.add(
+          'incorrect'
+        );
+
+      }
+
+
+      /*
+       * Feedback
+       */
+
+      showFeedback(
+        isCorrect,
+        explanation
+      );
+
+    }
+
+
+    /*
+     * ==========================================
+     * CHECK SHORT ANSWER
+     * ==========================================
+     */
+
+    function checkShortAnswer() {
+
+      if (answered) {
+        return;
+      }
+
+
+      const q =
+        rawQuizData[
+          currentQuestionIndex
+        ];
+
+
+      const input =
+        document.getElementById(
+          'short-answer-input'
+        );
+
+
+      const val =
+        input.value
+          .trim()
+          .toLowerCase();
+
+
+      /*
+       * Don't allow empty answers.
+       */
+
+      if (!val) {
+        return;
+      }
+
+
+      answered = true;
+
+
+      input.disabled = true;
+
+
+      /*
+       * Compare against acceptable answers.
+       */
+
+      const isCorrect =
+        q.acceptableAnswers.some(
+          ans =>
+            ans
+              .trim()
+              .toLowerCase() === val
+        );
+
+
+      if (isCorrect) {
+
+        score++;
+
+      }
+
+
+      showFeedback(
+        isCorrect,
+        q.explanation
+      );
+
+    }
+
+
+    /*
+     * ==========================================
+     * SHOW FEEDBACK
+     * ==========================================
+     */
+
+    function showFeedback(
+      isCorrect,
+      explanation
+    ) {
+
+      const feedbackBox =
+        document.getElementById(
+          'feedback-box'
+        );
+
+
+      feedbackBox.classList.add(
+        isCorrect
+          ? 'correct'
+          : 'incorrect'
+      );
+
+
+      feedbackBox.innerHTML = `
+
+        <strong>
+          ${
+            isCorrect
+              ? '✓ Correct!'
+              : '✗ Incorrect'
+          }
+        </strong>
+
+        <br>
+
+        ${explanation}
+
+      `;
+
+
+      feedbackBox.style.display =
+        'block';
+
+
+      /*
+       * Show next button.
+       */
+
+      document.getElementById(
+        'next-btn'
+      ).style.display =
+        'block';
+
+    }
+
+
+    /*
+     * ==========================================
+     * NEXT QUESTION
+     * ==========================================
+     */
+
+    function nextQuestion() {
+
+      currentQuestionIndex++;
+
+
+      if (
+        currentQuestionIndex <
+        rawQuizData.length
+      ) {
+
+        loadQuestion();
+
+      }
+
+      else {
+
+        showResults();
+
+      }
+
+    }
+
+
+    /*
+     * ==========================================
+     * SHOW RESULTS
+     * ==========================================
+     */
+
+    function showResults() {
+
+      /*
+       * Complete progress bar.
+       */
+
+      document.getElementById(
+        'progress-bar'
+      ).style.width =
+        '100%';
+
+
+      /*
+       * Update tracker.
+       */
+
+      document.getElementById(
+        'question-tracker'
+      ).innerText =
+        'Completed';
+
+
+      /*
+       * Hide question.
+       */
+
+      document.getElementById(
+        'question-text'
+      ).innerText =
+        '';
+
+
+      /*
+       * Hide interactive area.
+       */
+
+      document.getElementById(
+        'interactive-area'
+      ).style.display =
+        'none';
+
+
+      /*
+       * Hide feedback.
+       */
+
+      document.getElementById(
+        'feedback-box'
+      ).style.display =
+        'none';
+
+
+      /*
+       * Hide next button.
+       */
+
+      document.getElementById(
+        'next-btn'
+      ).style.display =
+        'none';
+
+
+      /*
+       * Calculate percentage.
+       */
+
+      const percentage =
+        Math.round(
+          (score /
+          rawQuizData.length) *
+          100
+        );
+
+
+      /*
+       * Display score.
+       */
+
+      document.getElementById(
+        'results-score'
+      ).innerText =
+        `${score} / ${rawQuizData.length}`;
+
+
+      document.getElementById(
+        'results-percentage'
+      ).innerText =
+        `Overall Score: ${percentage}%`;
+
+
+      /*
+       * Show results.
+       */
+
+      document.getElementById(
+        'results-box'
+      ).style.display =
+        'flex';
+
+    }
+
+
+    /*
+     * ==========================================
+     * RETURN TO MODULE MENU
+     * ==========================================
+     */
+
+    function showMenu() {
+
+      document.getElementById(
+        'quiz-card'
+      ).style.display =
+        'none';
+
+
+      document.getElementById(
+        'menu-screen'
+      ).style.display =
+        'flex';
+
+    }
+
+  </script>
+
+</body>
+</html>
