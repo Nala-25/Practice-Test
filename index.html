@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
 
   <title>BuCor Learning Portal</title>
-
 
   <style>
 
@@ -42,11 +39,8 @@
        ========================================= */
 
     * {
-
       box-sizing: border-box;
-
       margin: 0;
-
       padding: 0;
 
       font-family:
@@ -61,7 +55,6 @@
 
 
     body {
-
       background-color: var(--bg-color);
 
       color: var(--white);
@@ -69,9 +62,7 @@
       min-height: 100vh;
 
       display: flex;
-
       justify-content: center;
-
       align-items: center;
 
       padding: 20px 15px;
@@ -83,13 +74,10 @@
        ========================================= */
 
     .app-container {
-
       width: 100%;
-
       max-width: 420px;
 
       display: flex;
-
       flex-direction: column;
 
       gap: 16px;
@@ -101,7 +89,6 @@
        ========================================= */
 
     .loader {
-
       text-align: center;
 
       padding: 30px;
@@ -113,13 +100,11 @@
 
 
     .loader::after {
-
       content: "";
 
       display: block;
 
       width: 28px;
-
       height: 28px;
 
       margin: 14px auto 0;
@@ -137,15 +122,11 @@
     @keyframes spin {
 
       from {
-
         transform: rotate(0deg);
-
       }
 
       to {
-
         transform: rotate(360deg);
-
       }
 
     }
@@ -156,7 +137,6 @@
        ========================================= */
 
     .module-menu {
-
       display: flex;
 
       flex-direction: column;
@@ -166,7 +146,6 @@
 
 
     .module-card {
-
       background-color: var(--card-bg);
 
       color: var(--card-text);
@@ -195,7 +174,6 @@
 
 
     .module-card:hover {
-
       transform: translateY(-2px);
 
       background-color: #F3E9DD;
@@ -203,7 +181,6 @@
 
 
     .module-card:active {
-
       transform: scale(0.98);
     }
 
@@ -213,7 +190,6 @@
        ========================================= */
 
     .quiz-card {
-
       background-color: var(--card-bg);
 
       color: var(--card-text);
@@ -238,7 +214,6 @@
        ========================================= */
 
     .quiz-header {
-
       display: flex;
 
       justify-content: space-between;
@@ -261,7 +236,6 @@
 
 
     .back-btn {
-
       background: none;
 
       border: none;
@@ -277,7 +251,6 @@
 
 
     .back-btn:hover {
-
       color: var(--accent-dark);
 
       text-decoration: underline;
@@ -289,7 +262,6 @@
        ========================================= */
 
     .progress-bar-wrap {
-
       width: 100%;
 
       height: 6px;
@@ -303,7 +275,6 @@
 
 
     .progress-bar {
-
       height: 100%;
 
       width: 0%;
@@ -320,7 +291,6 @@
        ========================================= */
 
     .question-text {
-
       font-size: 1.05rem;
 
       font-weight: 600;
@@ -336,7 +306,6 @@
        ========================================= */
 
     .options-list {
-
       display: flex;
 
       flex-direction: column;
@@ -346,7 +315,6 @@
 
 
     .option-btn {
-
       background: var(--white);
 
       border:
@@ -371,7 +339,6 @@
 
 
     .option-btn:not(:disabled):hover {
-
       border-color: var(--accent);
 
       background-color: var(--light-bg);
@@ -379,7 +346,6 @@
 
 
     .option-btn.correct {
-
       background-color: #DCEBDD !important;
 
       border-color:
@@ -392,7 +358,6 @@
 
 
     .option-btn.incorrect {
-
       background-color: #F3DADA !important;
 
       border-color:
@@ -409,7 +374,6 @@
        ========================================= */
 
     .short-input-group {
-
       display: flex;
 
       flex-direction: column;
@@ -419,7 +383,6 @@
 
 
     .short-input {
-
       padding: 12px;
 
       border:
@@ -440,7 +403,6 @@
 
 
     .short-input:focus {
-
       border-color: var(--accent);
 
       box-shadow:
@@ -453,7 +415,6 @@
        ========================================= */
 
     .action-btn {
-
       background-color: var(--accent);
 
       color: var(--white);
@@ -477,13 +438,11 @@
 
 
     .action-btn:hover {
-
       background-color: var(--accent-dark);
     }
 
 
     .action-btn:active {
-
       transform: scale(0.98);
     }
 
@@ -493,7 +452,6 @@
        ========================================= */
 
     .feedback-box {
-
       display: none;
 
       padding: 12px 14px;
@@ -507,7 +465,6 @@
 
 
     .feedback-box.correct {
-
       background-color: #DCEBDD;
 
       border:
@@ -518,7 +475,6 @@
 
 
     .feedback-box.incorrect {
-
       background-color: #F3DADA;
 
       border:
@@ -533,7 +489,6 @@
        ========================================= */
 
     .next-btn {
-
       display: none;
 
       width: 100%;
@@ -547,7 +502,6 @@
        ========================================= */
 
     .results-box {
-
       display: none;
 
       text-align: center;
@@ -561,7 +515,6 @@
 
 
     .results-box h2 {
-
       color: var(--accent-dark);
 
       font-size: 1.4rem;
@@ -569,7 +522,6 @@
 
 
     .results-score {
-
       font-size: 2rem;
 
       font-weight: bold;
@@ -585,13 +537,11 @@
     @media (max-width: 480px) {
 
       body {
-
         padding: 12px;
       }
 
 
       .app-container {
-
         max-width: 100%;
 
         gap: 12px;
@@ -599,7 +549,6 @@
 
 
       .module-card {
-
         padding: 16px 18px;
 
         font-size: 1rem;
@@ -609,7 +558,6 @@
 
 
       .quiz-card {
-
         padding: 18px 15px;
 
         border-radius: 17px;
@@ -619,13 +567,11 @@
 
 
       .question-text {
-
         font-size: 1rem;
       }
 
 
       .option-btn {
-
         padding: 13px 12px;
 
         font-size: 0.92rem;
@@ -633,7 +579,6 @@
 
 
       .action-btn {
-
         padding: 13px;
 
         font-size: 0.98rem;
@@ -647,7 +592,6 @@
 
 
 <body>
-
 
   <div class="app-container">
 
@@ -730,7 +674,6 @@
 
       <div class="quiz-header">
 
-
         <button
           class="back-btn"
           onclick="showMenu()"
@@ -746,7 +689,6 @@
           Question 1/30
 
         </span>
-
 
       </div>
 
@@ -841,23 +783,7 @@
       </div>
 
 
-      <!-- =========================================
-           NEW BACK TO HOME BUTTON
-           ========================================= -->
-
-      <button
-        class="action-btn"
-        onclick="showMenu()"
-        style="margin-top: 5px;"
-      >
-
-        ← Back to Home
-
-      </button>
-
-
     </div>
-
 
   </div>
 
@@ -893,6 +819,98 @@
 
 
     /* =========================================
+       NEW: MODULE CACHE
+       ========================================= */
+
+    let moduleCache = {};
+
+
+    /* =========================================
+       NEW: PRELOAD MODULES
+       ========================================= */
+
+    async function preloadModules() {
+
+      const modules = [1, 2, 3];
+
+      modules.forEach(async moduleNum => {
+
+        try {
+
+          const url =
+            GAS_WEB_APP_URL +
+            '?module=' +
+            encodeURIComponent(moduleNum);
+
+
+          const response =
+            await fetch(url);
+
+
+          if (!response.ok) {
+
+            throw new Error(
+              'Server returned HTTP ' +
+              response.status
+            );
+
+          }
+
+
+          const result =
+            await response.json();
+
+
+          if (
+            result.success &&
+            Array.isArray(result.data)
+          ) {
+
+            moduleCache[moduleNum] =
+              result.data;
+
+
+            console.log(
+              'Module ' +
+              moduleNum +
+              ' preloaded.'
+            );
+
+          }
+
+        }
+
+        catch (error) {
+
+          console.warn(
+            'Could not preload Module ' +
+            moduleNum +
+            ':',
+            error
+          );
+
+        }
+
+      });
+
+    }
+
+
+    /* =========================================
+       START PRELOADING AFTER PAGE LOAD
+       ========================================= */
+
+    window.addEventListener(
+      'load',
+      () => {
+
+        preloadModules();
+
+      }
+    );
+
+
+    /* =========================================
        START MODULE
        ========================================= */
 
@@ -911,6 +929,30 @@
 
 
       currentModule = moduleNum;
+
+
+      /* =========================================
+         CHECK CACHE FIRST
+         ========================================= */
+
+      if (moduleCache[moduleNum]) {
+
+        console.log(
+          'Using cached Module:',
+          moduleNum
+        );
+
+
+        rawQuizData =
+          moduleCache[moduleNum];
+
+
+        initQuiz();
+
+
+        return;
+
+      }
 
 
       /* Show loader */
@@ -1031,6 +1073,16 @@
 
 
         /*
+         =========================================
+         NEW: SAVE TO CACHE
+         =========================================
+        */
+
+        moduleCache[moduleNum] =
+          result.data;
+
+
+        /*
          Hide loader
         */
 
@@ -1106,6 +1158,11 @@
 
       document.getElementById(
         'menu-screen'
+      ).style.display = 'none';
+
+
+      document.getElementById(
+        'loader'
       ).style.display = 'none';
 
 
@@ -1764,7 +1821,6 @@
 
 
   </script>
-
 
 </body>
 </html>
